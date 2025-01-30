@@ -11,11 +11,7 @@ export class SearchService {
 
   constructor(private http: HttpClient) {}
 
-  search(query: string, page: number = 1): Observable<any> {
-    const params = new HttpParams()
-      .set('query', query)
-      .set('page', page.toString());
-
-      return this.http.get(`${this.apiUrl}${API_CONFIG.searchEndpoint}`, { params });
+  search(query: string, page: number): Observable<any> {
+      return this.http.get(`${this.apiUrl}${API_CONFIG.searchEndpoint}/${query}/${page}`);
   }
 }

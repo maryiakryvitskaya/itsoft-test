@@ -1,0 +1,25 @@
+<cdk-virtual-scroll-viewport 
+  itemSize="50"
+  class="virtual-scroll" 
+  [style.height.px]="600"
+  #scrollableElement
+  (scrolledIndexChange)="nextBatch($event)">
+  
+
+    <div *cdkVirtualFor="let item of searchedItems" class="search-item">
+      <div class="item">
+        <img [src]="item.image" alt="{{ item.title }}" class="item-image">
+        <div class="item-info">
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.author }}</p>
+        </div>
+      </div>
+    </div>
+    
+    <div *ngIf="isLoading" class="loading">Loading...</div>
+ 
+  <ng-container *ngIf="!searchedItems.length && !isLoading">
+    <div class="no-results">Nothing found</div>
+  </ng-container>
+
+</cdk-virtual-scroll-viewport>

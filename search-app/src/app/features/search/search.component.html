@@ -1,1 +1,4 @@
-<p>search works!</p>
+<div class="search-container">
+    <app-search-input (queryChange)="onSearchChange($event)"></app-search-input>
+    <app-search-results [searchedItems]="searchedItems"  (loadMore)="loadMore()" [isLoading]="isLoading"></app-search-results>
+</div>
