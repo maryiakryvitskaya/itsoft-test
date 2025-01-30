@@ -41,24 +41,26 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
 
   constructor(private searchService: SearchService) {}
 
+  /**
+   * After view init
+   */
+
   ngAfterViewInit() {
     this.query$.subscribe((response) => {
       this.searchedItems = response.books ?? [];
     });
   }
 
-  private search(query: string) {
-    this.isLoading = true;
-    return this.searchService.search(query, this.currentPage).pipe(
-      finalize(() => (this.isLoading = false)),
-      takeUntil(this.destroy$),
-    );
-  }
+  // -----------------------------------------------------------------------------------------------------
+  // @ Public methods
+  // -----------------------------------------------------------------------------------------------------
 
+  // Event handler for search input change
   onSearchChange(query: string) {
     this.querySubject.next(query.trim() || null);
   }
 
+  // Load more results when scrolling
   loadMore() {
     if (this.isLoading || !this.querySubject.value) return;
 
@@ -74,10 +76,26 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
       });
   }
 
+  // -----------------------------------------------------------------------------------------------------
+  // @ Private methods
+  // -----------------------------------------------------------------------------------------------------
+
+  private search(query: string) {
+    this.isLoading = true;
+    return this.searchService.search(query, this.currentPage).pipe(
+      finalize(() => (this.isLoading = false)),
+      takeUntil(this.destroy$),
+    );
+  }
+
   private resetPagination() {
     this.currentPage = 1;
     this.searchedItems = [];
   }
+
+  /**
+   * On destroy
+   */
 
   ngOnDestroy() {
     this.destroy$.next();
