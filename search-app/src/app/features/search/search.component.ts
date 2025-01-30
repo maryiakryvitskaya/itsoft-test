@@ -9,7 +9,7 @@ import { BehaviorSubject, debounceTime, distinctUntilChanged, finalize, of, swit
   standalone: true,
   imports: [SearchInputComponent, SearchResultsComponent],
   templateUrl: './search.component.html',
-  styleUrl: './search.component.scss'
+  styleUrl: './search.component.scss',
 })
 export class SearchComponent implements AfterViewInit {
   private querySubject = new BehaviorSubject<string>('');
@@ -17,7 +17,7 @@ export class SearchComponent implements AfterViewInit {
     debounceTime(300),
     distinctUntilChanged(),
     tap(() => this.resetPagination()),
-    switchMap(query => this.search(query))
+    switchMap((query) => this.search(query)),
   );
 
   isLoading = false;
@@ -28,7 +28,7 @@ export class SearchComponent implements AfterViewInit {
   constructor(private searchService: SearchService) {}
 
   ngAfterViewInit() {
-    this.query$.subscribe(response => {
+    this.query$.subscribe((response) => {
       this.searchedItems = response?.books ?? [];
       this.isLoading = false;
     });
@@ -50,7 +50,7 @@ export class SearchComponent implements AfterViewInit {
     this.isLoading = true;
     this.currentPage++;
 
-    this.searchService.search(this.querySubject.value, this.currentPage).subscribe(response => {
+    this.searchService.search(this.querySubject.value, this.currentPage).subscribe((response) => {
       this.searchedItems = [...this.searchedItems, ...(response?.books ?? [])];
       this.isLoading = false;
     });

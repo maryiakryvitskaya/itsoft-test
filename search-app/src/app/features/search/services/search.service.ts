@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { API_CONFIG } from '../../../configs/api.congig';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SearchService {
   private apiUrl = API_CONFIG.apiUrl;
@@ -12,6 +12,6 @@ export class SearchService {
   constructor(private http: HttpClient) {}
 
   search(query: string, page: number): Observable<any> {
-      return this.http.get(`${this.apiUrl}${API_CONFIG.searchEndpoint}/${query}/${page}`);
+    return this.http.get(`${this.apiUrl}${API_CONFIG.searchEndpoint}/${query}/${page}`);
   }
 }

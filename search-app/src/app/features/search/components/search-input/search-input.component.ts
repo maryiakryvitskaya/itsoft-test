@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [FormsModule],
   templateUrl: './search-input.component.html',
-  styleUrl: './search-input.component.scss'
+  styleUrl: './search-input.component.scss',
 })
 export class SearchInputComponent {
   query = '';

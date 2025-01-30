@@ -7,7 +7,7 @@ import { NgIf } from '@angular/common';
   standalone: true,
   imports: [ScrollingModule, NgIf],
   templateUrl: './search-results.component.html',
-  styleUrl: './search-results.component.scss'
+  styleUrl: './search-results.component.scss',
 })
 export class SearchResultsComponent {
   @Input() searchedItems: any[] = [];
