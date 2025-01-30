@@ -1,8 +1,18 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { SearchService } from './services/search.service';
 import { SearchInputComponent } from './components/search-input/search-input.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
-import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, finalize, of, switchMap, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  Subject,
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  finalize,
+  switchMap,
+  takeUntil,
+  tap,
+} from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -11,9 +21,12 @@ import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, finalize, 
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
 })
-export class SearchComponent implements AfterViewInit {
+export class SearchComponent implements AfterViewInit, OnDestroy {
   private querySubject = new BehaviorSubject<string | null>(null);
+  private destroy$ = new Subject<void>();
+
   query$ = this.querySubject.asObservable().pipe(
+    takeUntil(this.destroy$),
     filter((query): query is string => !!query?.trim()),
     debounceTime(300),
     distinctUntilChanged(),
@@ -36,7 +49,10 @@ export class SearchComponent implements AfterViewInit {
 
   private search(query: string) {
     this.isLoading = true;
-    return this.searchService.search(query, this.currentPage).pipe(finalize(() => (this.isLoading = false)));
+    return this.searchService.search(query, this.currentPage).pipe(
+      finalize(() => (this.isLoading = false)),
+      takeUntil(this.destroy$),
+    );
   }
 
   onSearchChange(query: string) {
@@ -49,14 +65,22 @@ export class SearchComponent implements AfterViewInit {
     this.isLoading = true;
     this.currentPage++;
 
-    this.searchService.search(this.querySubject.value, this.currentPage).subscribe((response) => {
-      this.searchedItems = [...this.searchedItems, ...(response?.books ?? [])];
-      this.isLoading = false;
-    });
+    this.searchService
+      .search(this.querySubject.value, this.currentPage)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((response) => {
+        this.searchedItems = [...this.searchedItems, ...(response?.books ?? [])];
+        this.isLoading = false;
+      });
   }
 
   private resetPagination() {
     this.currentPage = 1;
     this.searchedItems = [];
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
