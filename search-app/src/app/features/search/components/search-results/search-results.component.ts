@@ -14,12 +14,10 @@ export class SearchResultsComponent {
   @Input() isLoading: boolean = false;
   @Output() loadMore = new EventEmitter<void>();
 
-  page: number = 1;
   itemsPerPage: number = 10;
 
   nextBatch(index: number) {
     if (index + this.itemsPerPage >= this.searchedItems.length) {
-      this.page++;
       this.loadMore.emit();
     }
   }
