@@ -26,6 +26,9 @@
   </div>
 
   <ng-container *ngIf="!searchedItems.length && !isLoading">
-    <div class="no-results">Nothing found</div>
+    <div class="no-results">
+      Nothing found
+      <strong>Try another query...</strong>
+    </div>
   </ng-container>
 </cdk-virtual-scroll-viewport>
