@@ -18,8 +18,10 @@ export const searchReducer = createReducer<SearchState>(
       ...result,
       books: [...state.results.books, ...result.books],
     },
-    pastQueries:
-      result.books.length > 0 ? Array.from(new Set([query, ...state.pastQueries])).slice(0, 10) : state.pastQueries,
+  })),
+  on(SearchActions.recordPastQuery, (state, { query }) => ({
+    ...state,
+    pastQueries: Array.from(new Set([query, ...state.pastQueries])).slice(0, 10),
   })),
   on(SearchActions.searchFailure, (state, { error }) => ({
     ...state,
@@ -28,7 +30,7 @@ export const searchReducer = createReducer<SearchState>(
   })),
   on(SearchActions.clearResults, (state) => ({
     ...state,
-    results: { books: [], total: '0' }, 
+    results: { books: [], total: '0' },
   })),
 );
 export { SearchState };

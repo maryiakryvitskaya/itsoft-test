@@ -17,3 +17,8 @@ export const searchFailure = createAction(
 );
 
 export const clearResults = createAction('[Search] Clear Results');
+
+export const recordPastQuery = createAction(
+    '[SEARCH] Record Past Query',
+    props<{ query: string }>()
+  );
