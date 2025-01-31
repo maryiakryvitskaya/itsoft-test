@@ -1,7 +1,8 @@
 <div class="search-container">
   <app-search-input (queryChange)="onSearchChange($event)"></app-search-input>
   <app-search-results
-    [searchedItems]="searchedItems"
+    [searchedItems]="(searchResults$ | async)!"
     (loadMore)="loadMore()"
-    [isLoading]="isLoading"></app-search-results>
+    [isLoading]="(isLoading$ | async)!">
+  </app-search-results>
 </div>

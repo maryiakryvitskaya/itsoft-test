@@ -14,7 +14,10 @@ export const searchReducer = createReducer<SearchState>(
   on(SearchActions.searchSuccess, (state, { result }) => ({
     ...state,
     isLoading: false,
-    results: result,
+    results: {
+      ...result,
+      books: [...state.results.books, ...result.books],
+    },
   })),
   on(SearchActions.searchFailure, (state, { error }) => ({
     ...state,
@@ -22,3 +25,4 @@ export const searchReducer = createReducer<SearchState>(
     error,
   })),
 );
+export { SearchState };

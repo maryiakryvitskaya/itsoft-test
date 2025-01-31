@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgIf } from '@angular/common';
+import { SearchResult } from '../../models/search.model';
+import { Book } from '../../models/book.model';
 
 @Component({
   selector: 'app-search-results',
@@ -10,7 +12,7 @@ import { NgIf } from '@angular/common';
   styleUrl: './search-results.component.scss',
 })
 export class SearchResultsComponent {
-  @Input() searchedItems: any[] = [];
+  @Input() searchedItems: Book[] = [];
   @Input() isLoading: boolean = false;
   @Output() loadMore = new EventEmitter<void>();
 
