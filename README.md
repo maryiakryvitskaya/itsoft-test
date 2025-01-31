@@ -6,7 +6,7 @@ This project implements a search functionality with NgRx for managing the state 
 
 See how the search feature works in the animation below:
 
-![App Demo](.search-app/assets/app-demo.gif)
+![App Demo](.search-app/src/assets/app-demo.gif)
 
 ## Assignment Details
 
