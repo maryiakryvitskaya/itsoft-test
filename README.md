@@ -53,17 +53,18 @@ See how the search feature works in the animation below:
 
 1. Clone the repository:
 
-   git clone <repository-url>
-   cd <project-folder>
+   ``git clone <repository-url>``
+
+   ``cd <project-folder>``
 
 2. Install the dependencies:
 
-   npm install
+   ``npm install``
 
 3. Run the application:
 
-   ng serve
+   ``ng serve``
 
 4. Open the application in your browser:
 
-   http://localhost:4200
+   ``http://localhost:4200``
