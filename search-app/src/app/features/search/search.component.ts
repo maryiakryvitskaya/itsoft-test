@@ -56,7 +56,16 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
 
   // Event handler for search input change
   onSearchChange(query: string) {
-    this.querySubject.next(query.trim());
+    // Update the query in the subject to trigger further actions
+    this.querySubject.next(query);
+
+    // If the query is empty, clear the results
+    if (!query.trim()) {
+      this.store.dispatch(SearchActions.clearResults());
+    } else {
+      // If the query is not empty, dispatch an action to search
+      this.store.dispatch(SearchActions.searchBooks({ query, page: 1 }));
+    }
   }
 
   // Load more results when scrolling

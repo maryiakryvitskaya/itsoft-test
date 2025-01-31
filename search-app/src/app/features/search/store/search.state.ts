@@ -6,6 +6,7 @@ export interface SearchState {
   isLoading: boolean;
   results: SearchResult;
   error: string | null;
+  pastQueries: string[];
 }
 
 export const initialState: SearchState = {
@@ -14,4 +15,5 @@ export const initialState: SearchState = {
   isLoading: false,
   results: { total: '0', books: [] },
   error: null,
+  pastQueries: [],
 };

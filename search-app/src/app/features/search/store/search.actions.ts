@@ -8,10 +8,12 @@ export const searchBooks = createAction(
 
 export const searchSuccess = createAction(
   '[SEARCH] Search Success',
-  props<{ result: SearchResult }>()
+  props<{ result: SearchResult, query: string }>()
 );
 
 export const searchFailure = createAction(
   '[SEARCH] Search Failure',
   props<{ error: string }>()
 );
+
+export const clearResults = createAction('[Search] Clear Results');

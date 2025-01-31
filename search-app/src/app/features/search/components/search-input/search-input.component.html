@@ -1,6 +1,14 @@
 <input
   class="search-input"
   type="text"
+  list="search-suggestions"
   [(ngModel)]="query"
   (ngModelChange)="onSearchChange($event)"
+  (change)="onSearchChange(query)"
   placeholder="Search..." />
+
+<datalist id="search-suggestions">
+  <option
+    *ngFor="let suggestion of suggestedQueries$ | async"
+    [value]="suggestion"></option>
+</datalist>

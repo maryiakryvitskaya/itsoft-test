@@ -17,7 +17,7 @@ export class SearchEffects {
       ofType(SearchActions.searchBooks),
       exhaustMap(({ query, page }) =>
         this.searchService.search(query, page).pipe(
-          map((result) => SearchActions.searchSuccess({ result })),
+          map((result) => SearchActions.searchSuccess({ result, query })),
           catchError((error) => of(SearchActions.searchFailure({ error: error.message }))),
         ),
       ),
