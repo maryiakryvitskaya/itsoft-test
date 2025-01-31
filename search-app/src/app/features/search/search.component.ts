@@ -23,7 +23,6 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
   query$ = this.querySubject.asObservable().pipe(
     takeUntil(this.destroy$),
     filter((query) => !!query.trim()),
-    debounceTime(300),
     distinctUntilChanged(),
     tap((query) => {
       this.lastQuery = query;

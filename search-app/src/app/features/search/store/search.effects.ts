@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, exhaustMap, map } from 'rxjs/operators';
+import { catchError, debounceTime, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { SearchService } from '../services/search.service';
 import * as SearchActions from './search.actions';
@@ -15,7 +15,8 @@ export class SearchEffects {
   searchBooks$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SearchActions.searchBooks),
-      exhaustMap(({ query, page }) =>
+      debounceTime(1000),
+      switchMap(({ query, page }) =>
         this.searchService.search(query, page).pipe(
           map((result) => SearchActions.searchSuccess({ result, query })),
           catchError((error) => of(SearchActions.searchFailure({ error: error.message }))),

@@ -28,7 +28,7 @@ export const searchReducer = createReducer<SearchState>(
   })),
   on(SearchActions.clearResults, (state) => ({
     ...state,
-    results: { books: [], total: '0' },
+    results: { books: [], total: '0' }, 
   })),
 );
 export { SearchState };
