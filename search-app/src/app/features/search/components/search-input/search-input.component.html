@@ -1,15 +1,22 @@
-<input
-  class="search-input"
-  type="text"
-  list="search-suggestions"
-  [(ngModel)]="query"
-  (ngModelChange)="onSearchChange($event)"
-  placeholder="Search..." />
+<div class="search-input-container">
+  <input
+    class="search-input"
+    type="text"
+    list="search-suggestions"
+    [(ngModel)]="query"
+    (ngModelChange)="onSearchChange($event)"
+    (focus)="showSuggestions = true"
+    #searchInput
+    placeholder="Search..." />
 
-<datalist id="search-suggestions">
-  <option
-    *ngFor="let suggestion of suggestedQueries$ | async"
-    [value]="suggestion"></option>
-</datalist>
-
-
+  <div
+    class="dropdown"
+    *ngIf="showSuggestions">
+    <div
+      class="option"
+      *ngFor="let suggestion of suggestedQueries$ | async"
+      (click)="selectSuggestion(suggestion)">
+      {{ suggestion }}
+    </div>
+  </div>
+</div>
