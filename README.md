@@ -2,6 +2,12 @@
 
 This project implements a search functionality with NgRx for managing the state of the application. It allows users to search books using a public API, store recent queries in the application state, and display search results with pagination and suggestions.
 
+## Demo
+
+See how the search feature works in the animation below:
+
+![App Demo](.search-app/assets/app-demo.gif)
+
 ## Assignment Details
 
 ### 1. Project Setup:
