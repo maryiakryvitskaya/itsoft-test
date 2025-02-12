@@ -1,0 +1,17 @@
+<mat-dialog-actions align="end">
+  <button
+    mat-button
+    class="dialog-button"
+    (click)="close()">
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Close icon"
+      fontIcon="close"></mat-icon>
+  </button>
+</mat-dialog-actions>
+<mat-dialog-content>
+  <img
+    [src]="data.image"
+    alt="{{ data.title }}"
+    class="dialog-image" />
+</mat-dialog-content>
