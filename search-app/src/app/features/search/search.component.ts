@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { SearchInputComponent } from './components/search-input/search-input.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
-import { Observable, Subject, debounceTime, distinctUntilChanged, filter, take, takeUntil, tap } from 'rxjs';
+import { Observable, Subject, distinctUntilChanged, filter, take, takeUntil, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as SearchActions from './store/search.actions';
 import { AsyncPipe } from '@angular/common';

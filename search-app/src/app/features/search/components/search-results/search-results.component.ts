@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgIf } from '@angular/common';
-import { SearchResult } from '../../models/search.model';
 import { Book } from '../../models/book.model';
 import { SearchResultItemComponent } from '../search-result-item/search-result-item.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -31,7 +30,7 @@ export class SearchResultsComponent {
 
   openDialog(item: Book) {
     this.dialog.open(SearchResultDialogComponent, {
-      width: '90%',
+      minWidth: '90%',
       height: '90%',
       data: item,
     });

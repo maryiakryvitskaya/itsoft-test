@@ -1,6 +1,6 @@
-<mat-dialog-actions align="end">
+<mat-dialog-actions class="dialog-header" align="end">
+  <div class="dialog-title" mat-dialog-title>Polygon Drawing Tool</div>
   <button
-    mat-button
     class="dialog-button"
     (click)="close()">
     <mat-icon
@@ -9,9 +9,17 @@
       fontIcon="close"></mat-icon>
   </button>
 </mat-dialog-actions>
+
+<div class="dialog-instructions">
+  <h2>How to use the drawing tool:</h2>
+  <ul>
+    <li>Click on the canvas to start drawing. Each point will be connected to the previous one.</li>
+    <li>To finish the shape, click on the first point.</li>
+    <li>Drag the shape to move it around the canvas.</li>
+    <li>Resize the shape by adjusting its corners.</li>
+  </ul>
+</div>
+
 <mat-dialog-content>
-  <img
-    [src]="data.image"
-    alt="{{ data.title }}"
-    class="dialog-image" />
+    <app-drawing-tool/>
 </mat-dialog-content>
