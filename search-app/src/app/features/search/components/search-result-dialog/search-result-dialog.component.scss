@@ -1,0 +1,41 @@
+.dialog {
+  &-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-title {
+    padding: 0;
+    padding-left: 10px;
+  }
+
+  &-button {
+    padding: 0;
+    cursor: pointer;
+  }
+
+  &-instructions {
+    padding: 20px;
+    font-size: 16px;
+    color: #333;
+
+    h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+  }
+}
+
+mat-icon {
+  vertical-align: middle;
+  margin: 0;
+}
